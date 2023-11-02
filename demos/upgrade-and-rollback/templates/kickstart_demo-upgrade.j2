@@ -16,10 +16,12 @@ user --name={{ builder_compose_customizations['user']['name'] }} --group=wheel,u
 ## use local ostree
 #ostreesetup --osname=rhel --url=file:///run/install/repo/ostree/repo --ref=rhel/9/x86_64/edge --nogpg
 # use remote ostree
-ostreesetup --nogpg --osname=rhel --remote=edge --url=http://{{ ansible_host }}/{{ builder_blueprint_name }}/repo/ --ref={{ builder_blueprint_ref }}
+ostreesetup --nogpg --osname=rhel --remote=edge --url=http://{{ ansible_host_macvtap }}/{{ builder_blueprint_name }}/repo/ --ref={{ builder_blueprint_ref }}
 
-# reboot after installation is successfully completed
-reboot --eject
+# reboot after installation is successfully completed (eject works only with virtual media)
+#reboot --eject
+# in case of usb drive have to shutdown the system and manually remove the usb and restart the host
+halt
 
 
 ############################################################################
