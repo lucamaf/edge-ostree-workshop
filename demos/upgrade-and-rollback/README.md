@@ -78,7 +78,7 @@ dnf install -y ansible
 
 > laptop
 ```
-ansible-galaxy collection install -f git+https://github.com/redhat-cop/infra.osbuild --upgrade
+ansible-galaxy collection install -f git+https://github.com/redhat-cop/infra.osbuild
 ```
 
 * Modify the Ansible `inventory` file with your values
