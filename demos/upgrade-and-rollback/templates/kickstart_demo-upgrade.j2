@@ -123,7 +123,7 @@ EOF
 
 
 # define listener
-node_ip=$(ip a show dev $(ip route | grep default | awk '{print $5}') | grep "inet " | awk '{print $2}' | awk -F / '{print $1}')
+node_ip=$(ip a show dev $(ip route | grep default | awk 'FNR == 1 {print $5}') | grep "inet " | awk '{print $2}' | awk -F / '{print $1}')
 
 ##
 ## Create a service to launch the container workload and restart
@@ -237,8 +237,8 @@ mkdir -p /var/home/admin/.config/systemd/user/multi-user.target.wants
 
 
 
-# define listener for socket activation
-node_ip=$(ip a show dev $(ip route | grep default | awk '{print $5}') | grep "inet " | awk '{print $2}' | awk -F / '{print $1}')
+# define listener for socket activation, modified to pick first address in case of multiple interfaces
+node_ip=$(ip a show dev $(ip route | grep default | awk 'FNR == 1 {print $5}') | grep "inet " | awk '{print $2}' | awk -F / '{print $1}')
 
 cat << EOF > /var/home/admin/.config/systemd/user/container-httpd-proxy.socket
 [Socket]
