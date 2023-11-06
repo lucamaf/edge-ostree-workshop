@@ -41,6 +41,7 @@
           vars:
             builder_skip_repo: false
             builder_kickstart: "{{ playbook_dir }}/../templates/kickstart_demo-upgrade.j2"
+            # use edge-installer on onlogic
             builder_compose_type: edge-commit
             builder_pub_key: "{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
             builder_compose_customizations:
