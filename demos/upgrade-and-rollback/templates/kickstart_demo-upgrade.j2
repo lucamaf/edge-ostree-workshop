@@ -3,6 +3,9 @@ keyboard us
 timezone Etc/UTC --utc
 zerombr
 clearpart --all --initlabel
+# test multipart disks avoidance on onlogic  --drives=sdb
+# lsblk -f
+#ignoredisk --only-use=disk/by-id/dm-uuid-mpath-2416CD96995134CA5D787F00A5AA11017
 autopart --type=plain --fstype=xfs --nohome
 text
 
@@ -20,8 +23,8 @@ ostreesetup --nogpg --osname=rhel --remote=edge --url=http://{{ ansible_host_mac
 
 # reboot after installation is successfully completed (eject works only with virtual media)
 #reboot --eject
-# in case of usb drive have to shutdown the system and manually remove the usb and restart the host
-halt
+# in case of usb drive have to shutdown the system and manually remove the usb and restart manually the host
+poweroff --eject
 
 
 ############################################################################

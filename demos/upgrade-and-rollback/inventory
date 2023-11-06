@@ -3,6 +3,7 @@ all:
   hosts:
     image_builder:
       ansible_host: 192.168.122.238
+      # when using a VM remember to use the same address as above
       ansible_host_macvtap: 192.168.0.102
       ansible_port: 22
       ansible_user: luca

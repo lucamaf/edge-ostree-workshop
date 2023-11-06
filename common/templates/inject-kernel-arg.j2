@@ -19,7 +19,8 @@ set -x
 
 
       # Kickstart could be imported into the image and be used instead downloading from the HTTP server... but modifiying the kickstart in the HTTP server is easier...
-      #cp ${kickstart_file} tmp/rhel-iso/ks.cfg
+      # modifiying for the onlogic
+      #cp /var/www/html/demo_upgrade/kickstart.ks tmp/rhel-iso/ks.cfg
 
 
 
@@ -37,7 +38,8 @@ set -x
 
          sed -i 's/timeout=60/timeout=1/g' EFI/BOOT/grub.cfg
 
-         #sed -i "s/quiet/inst.ks=hd:LABEL=${iso_label}:\/ks.cfg/g" EFI/BOOT/grub.cfg
+         
+         #sed -i "s/quiet/inst.ks=hd:LABEL=${iso_label}:\/ks.cfg nompath/g" EFI/BOOT/grub.cfg
          # modified the publish address with the one exposed by the vm on the network through direct interface
          sed -i "s/inst.stage2/inst.ks=http:\/\/{{ ansible_host_macvtap }}\/{{ builder_blueprint_name }}\/kickstart.ks inst.stage2/g" EFI/BOOT/grub.cfg
          sed -i "s/RHEL-.-.-0-BaseOS-$(arch)/${iso_label}/g" EFI/BOOT/grub.cfg
@@ -56,7 +58,7 @@ set -x
 
 
       else
-         #sed -i "s/quiet/inst.ks=hd:LABEL=${iso_label}:\/ks.cfg/g" isolinux/isolinux.cfg
+         #sed -i "s/quiet/inst.ks=hd:LABEL=${iso_label}:\/ks.cfg nompath/g" isolinux/isolinux.cfg
          sed -i "s/quiet/inst.ks=http:\/\/{{ ansible_host_macvtap }}\/{{ builder_blueprint_name }}\/kickstart.ks/g" isolinux/isolinux.cfg
          sed -i 's/timeout 600/timeout 1/g' isolinux/isolinux.cfg
          sed -i "s/RHEL-.-.-0-BaseOS-$(arch)/${iso_label}/g" isolinux/isolinux.cfg
@@ -66,7 +68,7 @@ set -x
          sed -i 's/timeout=60/timeout=1/g' EFI/BOOT/BOOT.conf
          sed -i 's/timeout=60/timeout=1/g' EFI/BOOT/grub.cfg
 
-         #sed -i "s/quiet/inst.ks=hd:LABEL=${iso_label}:\/ks.cfg/g" EFI/BOOT/grub.cfg
+         #sed -i "s/quiet/inst.ks=hd:LABEL=${iso_label}:\/ks.cfg nompath/g" EFI/BOOT/grub.cfg
          sed -i "s/quiet/inst.ks=http:\/\/{{ ansible_host_macvtap }}\/{{ builder_blueprint_name }}\/kickstart.ks/g" EFI/BOOT/grub.cfg
          sed -i "s/RHEL-.-.-0-BaseOS-$(arch)/${iso_label}/g" EFI/BOOT/grub.cfg
 

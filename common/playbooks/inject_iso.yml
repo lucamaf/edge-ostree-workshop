@@ -14,9 +14,14 @@
         - set_fact:
             cdn_client_key: "{{ ls_client_key.stdout }}"
 
+        - name: check if iso file exists
+          stat: 
+            path: $HOME/rhel-9.2-x86_64-boot.iso
+          register: iso_file
 
         - name: Download Red Hat ISO
           shell: "curl -L  --cacert /etc/rhsm/ca/redhat-uep.pem --cert {{ cdn_client_cert }} --key {{ cdn_client_key }} {{ system.cdn_rhel_iso }} -O"
+          when: iso_file.stat.exists == false
 
 
 

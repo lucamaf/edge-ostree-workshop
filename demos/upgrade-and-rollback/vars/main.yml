@@ -13,5 +13,5 @@ apps:
     prodtag: prod
 
 system:
-  hostname: "demo-upgrade"
+  hostname: "demo-upgrade-luca"
   cdn_rhel_iso: "https://cdn.redhat.com/content/dist/rhel9/9/x86_64/baseos/iso/rhel-9.2-x86_64-boot.iso"

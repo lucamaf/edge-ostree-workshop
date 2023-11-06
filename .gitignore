@@ -1,0 +1,2 @@
+common/templates/inject-kernel-arg.j2.bak
+demos/upgrade-and-rollback/playbooks/00-preparation-ostree.yml.bak
